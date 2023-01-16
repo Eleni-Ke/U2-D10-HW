@@ -18,15 +18,38 @@ const createPinkFloydAlbums = (data) => {
   let pinkFloydRow = document.querySelector("#pinkFloydList");
   let dataArray = data.data;
   for (let i = 0; i < dataArray.length; i++) {
-    pinkFloydRow.innerHTML += `
-        <div class="card" style="width: 18rem;">
-            <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${dataArray[i].title}</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>`;
+    pinkFloydRow.innerHTML += `<div class="col card-container">
+    <div class="card" style="width: 10rem;">
+        <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${dataArray[i].title}</h5>
+        </div>
+    </div>
+</div>`;
+  }
+};
+
+const getDaftPunk = () => {
+  fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=daft punk")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data), createDaftPunkAlbum(data);
+    })
+    .catch((err) => console.error(err));
+};
+
+const createDaftPunkAlbum = (data) => {
+  let daftPunkRow = document.querySelector("#daftPunkList");
+  let dataArray = data.data;
+  for (let i = 0; i < dataArray.length; i++) {
+    daftPunkRow.innerHTML += `<div class="col card-container">
+    <div class="card" style="width: 10rem;">
+        <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${dataArray[i].title}</h5>
+        </div>
+    </div>
+</div>`;
   }
 };
 
@@ -34,12 +57,58 @@ const getMetallica = () => {
   fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data), createAlbums(data);
+      console.log(data), createMetallicaAlbums(data);
     })
     .catch((err) => console.error(err));
 };
 
+const createMetallicaAlbums = (data) => {
+  let metallicaRow = document.querySelector("#metallicaList");
+  let dataArray = data.data;
+  for (let i = 0; i < dataArray.length; i++) {
+    metallicaRow.innerHTML += `<div class="col card-container">
+    <div class="card" style="width: 10rem;">
+        <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${dataArray[i].title}</h5>
+        </div>
+    </div>
+</div>`;
+  }
+};
+
+// const getSongs = (artist) => {
+//   fetch(
+//     "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + "artist"
+//   )
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data), createAlbums(data);
+//     })
+//     .catch((err) => console.error(err));
+// };
+
+// const createAlbums = (data) => {
+//   let allSongsRow = document.querySelector("#allSongs");
+//   let dataArray = data.data;
+//   for (let i = 0; i < dataArray.length; i++) {
+//     allSongsRow.innerHTML += `<div class="col card-container">
+//     <div class="card" style="width: 10rem;">
+//         <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
+//         <div class="card-body">
+//             <h5 class="card-title">${dataArray[i].title}</h5>
+//         </div>
+//     </div>
+// </div>`;
+//   }
+// };
+
 window.onload = () => {
   getPinkFloyd();
+  getDaftPunk();
   getMetallica();
 };
+
+// window.onload = () => {
+//   getSongs("daft punk");
+// };
