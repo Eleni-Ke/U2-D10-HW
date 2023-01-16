@@ -19,7 +19,7 @@ const createPinkFloydAlbums = (data) => {
   let dataArray = data.data;
   for (let i = 0; i < dataArray.length; i++) {
     pinkFloydRow.innerHTML += `<div class="col card-container">
-    <div class="card" style="width: 10rem;">
+    <div id="${dataArray[i].album.id}" class="card" style="width: 10rem;">
         <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${dataArray[i].title}</h5>
@@ -43,7 +43,7 @@ const createDaftPunkAlbum = (data) => {
   let dataArray = data.data;
   for (let i = 0; i < dataArray.length; i++) {
     daftPunkRow.innerHTML += `<div class="col card-container">
-    <div class="card" style="width: 10rem;">
+    <div id="${dataArray[i].album.id}" class="card" style="width: 10rem;">
         <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${dataArray[i].title}</h5>
@@ -67,7 +67,7 @@ const createMetallicaAlbums = (data) => {
   let dataArray = data.data;
   for (let i = 0; i < dataArray.length; i++) {
     metallicaRow.innerHTML += `<div class="col card-container">
-    <div class="card" style="width: 10rem;">
+    <div id="${dataArray[i].album.id}" class="card" style="width: 10rem;">
         <img src="${dataArray[i].album.cover_medium}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${dataArray[i].title}</h5>
@@ -79,7 +79,7 @@ const createMetallicaAlbums = (data) => {
 
 // const getSongs = (artist) => {
 //   fetch(
-//     "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + "artist"
+//     "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + artist
 //   )
 //     .then((response) => response.json())
 //     .then((data) => {
@@ -103,12 +103,31 @@ const createMetallicaAlbums = (data) => {
 //   }
 // };
 
+// window.onload = () => {
+//   getSongs("daft punk");
+// };
+
+const getAllSongs = () => {
+  let allSongsArr = document.querySelectorAll(".card-title");
+  let modalBodyNode = document.querySelector("#song-list");
+  for (let i = 0; i < allSongsArr.length; i++) {
+    modalBodyNode.innerHTML += `<li>${allSongsArr[i].innerHTML}</li>`;
+  }
+};
+
 window.onload = () => {
   getPinkFloyd();
   getDaftPunk();
   getMetallica();
 };
 
-// window.onload = () => {
-//   getSongs("daft punk");
-// };
+const countUniqueSongs = () => {
+  let allSongsArr = document.querySelectorAll(".card");
+  let uniqueAlbumList = [];
+  for (let i = 0; i < allSongsArr.length; i++) {
+    if (!uniqueAlbumList.includes(allSongsArr[i].id)) {
+      uniqueAlbumList.push(allSongsArr[i].id);
+    }
+  }
+  console.log(uniqueAlbumList.length);
+};
