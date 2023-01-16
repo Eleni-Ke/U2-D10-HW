@@ -110,6 +110,7 @@ const createMetallicaAlbums = (data) => {
 const getAllSongs = () => {
   let allSongsArr = document.querySelectorAll(".card-title");
   let modalBodyNode = document.querySelector("#song-list");
+  modalBodyNode.innerHTML = "";
   for (let i = 0; i < allSongsArr.length; i++) {
     modalBodyNode.innerHTML += `<li>${allSongsArr[i].innerHTML}</li>`;
   }
